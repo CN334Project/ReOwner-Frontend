@@ -23,7 +23,7 @@ export default function Navbar() {
           <a href="/home" className="text-lg font-regular font-fraunces hover:underline">Home</a>
           <a href="/shop" className="text-lg font-regular font-fraunces hover:underline">Shop</a>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center transition duration-150 hover:scale-110">
           <Image src="/CartIcon.png" alt="Icon" width={70} height={70} />
         </div>
       </div>
