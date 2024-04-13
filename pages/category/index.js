@@ -17,7 +17,7 @@ export default function Shop() {
             </svg>
         </div>
         <div class="h-screen w-full bg-white">
-            <h1 class="font-en-font text-4xl my-8 mb-12 pl-20 -mt-10">Most viewed</h1>
+            <h1 class="font-en-font font-semibold text-4xl my-8 mb-12 pl-20 -mt-10">Most viewed</h1>
             <div class="grid grid-flow-row-dense grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 h-screen w-full mx-3 content-start justify-items-center">
                 <ItemCard/>
                 <ItemCard/>
