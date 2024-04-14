@@ -63,20 +63,20 @@ export default function Details() {
         </div>
 
         <div className="mt-20">
-          <h1 className="text-black text-5xl font-bold leading-tight mb-4 fraunces-font">
+          <h1 className="text-black text-5xl font-bold leading-tight mb-4 font-en-font">
             {titleText}
           </h1>
 
-          <h3 className="text-black text-xl font-semibold mb-4 fraunces-font">
+          <h3 className="text-black text-xl font-semibold mb-4 font-th-font">
             รายละเอียดสินค้า
           </h3>
 
-          <p className="text-black text-base mb-10 fraunces-font" dangerouslySetInnerHTML={{ __html: detailsText }}></p>
+          <p className="text-black text-base mb-10 font-th-font" dangerouslySetInnerHTML={{ __html: detailsText }}></p>
 
           <div className="flex justify-between items-center mb-10">
             <div className="relative">
               <Image src="/priceContainer.png" alt="bg" width={383} height={103} />
-              <div className="absolute inset-0 flex justify-center items-center text-white text-5xl fraunces-font">
+              <div className="absolute inset-0 flex justify-center items-center text-white text-5xl font-th-font">
                 {mockupPrice} บาท
               </div>
             </div>

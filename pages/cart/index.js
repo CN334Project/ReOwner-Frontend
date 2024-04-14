@@ -31,21 +31,23 @@ export default function Cart() {
 
       <div className="relative">
         <div className="mt-20 ml-32">
-          <h1 className="text-black text-8xl font-black leading-tight fraunces-font">
+          <h1 className="text-black text-8xl font-black leading-tight font-en-font">
             My Cart
           </h1>
-          {products.map((product) => (
-            <CartCard key={product.id} data={product} />
-          ))}
+          <div className="font-th-font">
+            {products.map((product) => (
+              <CartCard key={product.id} data={product} />
+            ))}
+          </div>
 
           <div className="flex justify-between mb-32">
             <div className="flex items-center">
-              <div className="text-black text-5xl font-medium fraunces-font">
+              <div className="text-black text-5xl font-medium font-en-font">
                 Total {totalprice} บาท
               </div>
             </div>
 
-            <div style={{marginRight: "133px" }}>
+            <div style={{ marginRight: "133px" }}>
               <button onClick={handleConfirm} className="focus:outline-none">
                 <Image
                   src="/buttonConfirm.png"
