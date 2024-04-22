@@ -20,10 +20,10 @@ export default function Navbar() {
       <div className="flex items-center justify-between" style={{ marginLeft: "80px", marginRight: "133px" }}>
         <div className="flex items-center space-x-10">
           <Image src="/Logo.png" alt="Logo" width={238} height={110} />
-          <a href="/" className="text-lg font-regular font-fraunces hover:underline">Home</a>
+          <a href="/home" className="text-lg font-regular font-fraunces hover:underline">Home</a>
           <a href="/shop" className="text-lg font-regular font-fraunces hover:underline">Shop</a>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center transition duration-150 hover:scale-110">
           <Image src="/CartIcon.png" alt="Icon" width={70} height={70} />
         </div>
       </div>
