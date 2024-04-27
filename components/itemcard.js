@@ -13,11 +13,11 @@ export default function ItemCard({ item }) {
   return (
     <button onClick={() => handleNavigate(item)}>
       <div class="flex items-center justify-center max-w-xl max-h-56 p-3">
-        <div class="relative">
+        <div class=" flex flex-col relative h-56 w-48 justify-center">
           <img class="relative z-0" src="/Ellipse 7.png" />
           <img class="absolute z-10 top-0 left-0" src={item.image} />
         </div>
-        <div class="mx-5">
+        <div class="flex flex-col mx-5 h-56 w-80 pb-4 justify-center">
           <div class="flex flex-wrap">
             <p class="font-en-font text-3xl pr-2 ">{item.name}</p>
             {/* <p class="font-th-font text-3xl ">กลูสตอด</p> */}
