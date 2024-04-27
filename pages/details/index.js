@@ -32,10 +32,9 @@ export default function Details() {
         console.error(err);
       }
     };
-  
+
     fetchProductList();
   }, [router.query.keyword]); // Add router.query.keyword to dependency array
-  
 
   // const handleAddToCart = () => {
   //   console.log("Add to cart clicked");
@@ -43,15 +42,64 @@ export default function Details() {
 
   const handleAddToCart = async () => {
     try {
-      const response = await axios.post("http://localhost:3005/cart/add", {
-        productId: items._id, // Assuming items._id is the ID of the product
-      });
-      console.log("Product added to cart:", response.data);
-      // You may want to update the UI or show a success message here
+      const cartID = localStorage.getItem("cartID");
+      if (cartID) {
+        const response = await axios.patch(
+          `http://localhost:3005/cart/${cartID}`,
+          {
+            productId: items._id,
+          }
+        );
+      } else {
+        const response = await axios.post("http://localhost:3005/cart/add", {
+          productId: items._id, // Assuming items._id is the ID of the product
+        });
+        const newCartID = response.data._id;
+        localStorage.setItem("cartID", newCartID);
+
+        // console.log("Product added to cart:", response.data._id);
+      }
+      router.push("/cart");
     } catch (error) {
       console.error("Error adding product to cart:", error);
       // Handle error, show error message, etc.
     }
+  };
+
+  const play = async () => {
+    const audioCtx = new AudioContext();
+    let buffer = null;
+    const handleAudioProduct = async () => {
+      const API_URL = `http://localhost:3005/sound/${router.query.keyword}.wav`;
+      try {
+        const result = await fetch(API_URL, {
+          method: "GET",
+          
+        });
+        if (result.ok) {
+          const arrayBuffer = await result.arrayBuffer();
+          return arrayBuffer;
+        } else {
+          throw new Error(`Error: ${result.status} - ${result.statusText}`);
+        }
+      } catch (err) {
+        throw err;
+      }
+    };
+    const audioData = await handleAudioProduct();
+    audioCtx.decodeAudioData(
+      audioData,
+      (decodedData) => {
+        buffer = decodedData;
+        const source = audioCtx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioCtx.destination);
+        source.start(0);
+      },
+      (error) => {
+        console.error("Error decoding audio data:", error);
+      }
+    );
   };
 
   return (
@@ -78,6 +126,9 @@ export default function Details() {
           <p className="text-black text-base mb-10 font-th-font">
             {items.description}
           </p>
+          <button onClick={play} className="mr-5 mb-7 flex-shrink-0">
+            <img src="/volume.png" alt="Speaker Icon" className="w-8 h-8" />
+          </button>
 
           <div className="flex justify-between items-center mb-10">
             <div className="relative">
@@ -91,16 +142,15 @@ export default function Details() {
                 {items.price} บาท
               </div>
             </div>
-            <a href="/cart">
-              <button onClick={handleAddToCart} className="focus:outline-none">
-                <Image
-                  src="/buttonAddtocart.png"
-                  alt="Add to Cart"
-                  width={289}
-                  height={101}
-                />
-              </button>
-            </a>
+
+            <button onClick={handleAddToCart} className="focus:outline-none">
+              <Image
+                src="/buttonAddtocart.png"
+                alt="Add to Cart"
+                width={289}
+                height={101}
+              />
+            </button>
           </div>
         </div>
       </div>

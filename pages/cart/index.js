@@ -7,9 +7,12 @@ import { useRouter } from "next/router";
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const router = useRouter();
+  const cartID =
+    typeof window !== "undefined" ? localStorage.getItem("cartID") : "";
+  
 
   useEffect(() => {
-    fetch("http://localhost:3005/cart")
+    fetch(`http://localhost:3005/cart/${cartID}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -17,8 +20,8 @@ export default function Cart() {
         return response.json();
       })
       .then((data) => {
-        console.log("Data fetched successfully:", data);
-        setCartItems(data); // Update state with fetched data
+        console.log("Data fetched successfully:", data.product);
+        setCartItems(data.product); // Update state with fetched data
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -32,7 +35,7 @@ export default function Cart() {
 
     let totalPrice = 0;
     cartItems.forEach((item) => {
-      totalPrice += item.product.price;
+      totalPrice += item.price;
     });
     return totalPrice;
   };
