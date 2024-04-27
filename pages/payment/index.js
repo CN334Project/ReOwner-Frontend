@@ -20,7 +20,7 @@ export default function Home() {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-12 border-b border-black" >
 
             <div className="sm:col-span-4">
-              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900 font-th-font">
                 ชื่อ-นามสกุล
               </label>
               <div className="mt-2">
@@ -35,7 +35,7 @@ export default function Home() {
             </div>
 
             <div className="sm:col-span-4">
-              <label htmlFor="province" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="province" className="block text-sm font-medium leading-6 text-gray-900 font-th-font">
                 จังหวัด
               </label>
               <div className="mt-2">
@@ -50,7 +50,7 @@ export default function Home() {
             </div>
 
             <div className="sm:col-span-4">
-              <label htmlFor="district" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="district" className="block text-sm font-medium leading-6 text-gray-900 font-th-font">
                 เขต/อำเภอ
               </label>
               <div className="mt-2">
@@ -65,7 +65,7 @@ export default function Home() {
             </div>
 
             <div className="sm:col-span-4">
-              <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900 font-th-font">
                 เบอร์โทรศัพท์
               </label>
               <div className="mt-2">
@@ -80,7 +80,7 @@ export default function Home() {
             </div>
 
             <div className="sm:col-span-4">
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 font-th-font">
                 แขวง/ตำบล
               </label>
               <div className="mt-2">
@@ -95,7 +95,7 @@ export default function Home() {
             </div>
 
             <div className="sm:col-span-4">
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 font-th-font">
                 รหัสไปรษณีย์
               </label>
               <div className="mt-2">
@@ -111,7 +111,7 @@ export default function Home() {
 
 
             <div className="sm:col-span-4 mb-20">
-              <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900 font-th-font">
                 ที่อยู่
               </label>
               <div className="mt-2">
@@ -126,32 +126,32 @@ export default function Home() {
             </div>
           </div>
 
-            <p style={{ color: "black", fontSize: "40px", fontFamily: "Fraunces, sans-serif", fontWeight: "bold", paddingTop: "30px"}}>Payment</p>
+          <p style={{ color: "black", fontSize: "40px", fontFamily: "Fraunces, sans-serif", fontWeight: "bold", paddingTop: "30px" }}>Payment</p>
 
-            <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-12 ">
-              <button className="sm:col-span-4 mt-10">
+          <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-12 ">
+            <button className="sm:col-span-4 mt-10">
               <Image src="/promptpay.png" alt="bg" width={350} height={262} />
-              </button>
-              <button className="sm:col-span-4 mt-10">
+            </button>
+            <button className="sm:col-span-4 mt-10">
               <Image src="/credit.png" alt="bg" width={350} height={262} />
-              </button>
-              <button className="sm:col-span-4 mt-10">
+            </button>
+            <button className="sm:col-span-4 mt-10">
               <Image src="/bank.png" alt="bg" width={350} height={262} />
-              </button>
-            </div>
+            </button>
+          </div>
 
-            <div style={{ marginLeft: "920px",marginTop: "80px" }}>
-      <Link href=" ">
-        <button className="focus:outline-none" >
-          <Image
-            src="/buttonPayment.png"
-            alt="Shop Now"
-            width={289}
-            height={101}
-          />
-        </button>
-      </Link>
-    </div>
+          <div style={{ marginLeft: "970px", marginTop: "80px" }}>
+            <Link href=" ">
+              <button className="focus:outline-none" >
+                <Image
+                  src="/buttonPayment.png"
+                  alt="Shop Now"
+                  width={239}
+                  height={101}
+                />
+              </button>
+            </Link>
+          </div>
 
         </div>
 
