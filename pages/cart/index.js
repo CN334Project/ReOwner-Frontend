@@ -2,9 +2,11 @@ import Image from "next/image";
 import Navbar from "../../components/navbar";
 import CartCard from "@/components/cartcard";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     fetch("http://localhost:3005/cart")
@@ -36,7 +38,9 @@ export default function Cart() {
   };
 
   const handleConfirm = () => {
-    console.log("Confirm");
+    if (!cartItems || cartItems.length === 0) {
+      return true;
+    }
   };
 
   return (
@@ -64,16 +68,18 @@ export default function Cart() {
               </div>
             </div>
             <div style={{ marginRight: "133px" }}>
-              <a href="/payment">
-                <button onClick={handleConfirm} className="focus:outline-none">
-                  <Image
-                    src="/buttonConfirm.png"
-                    alt="Add to Cart"
-                    width={289}
-                    height={101}
-                  />
-                </button>
-              </a>
+              <button
+                onClick={() => router.push("/payment")}
+                disabled={handleConfirm()}
+                className="focus:outline-none"
+              >
+                <Image
+                  src="/buttonConfirm.png"
+                  alt="Add to Cart"
+                  width={289}
+                  height={101}
+                />
+              </button>
             </div>
           </div>
         </div>

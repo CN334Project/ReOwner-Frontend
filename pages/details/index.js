@@ -10,37 +10,32 @@ export default function Details() {
 
   const name = router.query.keyword;
 
-  const handleProductList = async () => {
-    const API_URL = `http://localhost:3005/products/${name}`;
-    try {
-      const result = await fetch(API_URL, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (result.ok) {
-        const responseBody = await result.text();
-        return responseBody;
-      } else {
-        throw new Error(`Error: ${result.status} - ${result.body}`);
-      }
-    } catch (err) {
-      throw err;
-    }
-  };
-
   useEffect(() => {
     const fetchProductList = async () => {
       try {
-        const result = await handleProductList();
-        setItems(JSON.parse(result));
+        if (router.query.keyword) {
+          const API_URL = `http://localhost:3005/products/${router.query.keyword}`;
+          const result = await fetch(API_URL, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          if (result.ok) {
+            const responseBody = await result.text();
+            setItems(JSON.parse(responseBody));
+          } else {
+            throw new Error(`Error: ${result.status} - ${result.body}`);
+          }
+        }
       } catch (err) {
         console.error(err);
       }
     };
+  
     fetchProductList();
-  }, []);
+  }, [router.query.keyword]); // Add router.query.keyword to dependency array
+  
 
   // const handleAddToCart = () => {
   //   console.log("Add to cart clicked");
