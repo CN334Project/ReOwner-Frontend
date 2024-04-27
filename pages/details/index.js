@@ -62,7 +62,6 @@ export default function Details() {
       router.push("/cart");
     } catch (error) {
       console.error("Error adding product to cart:", error);
-      // Handle error, show error message, etc.
     }
   };
 
