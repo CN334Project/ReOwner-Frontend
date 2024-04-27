@@ -1,25 +1,39 @@
 import Image from "next/image";
 import Navbar from "../../components/navbar";
 import CartCard from "@/components/cartcard";
+import React, { useState, useEffect } from "react";
 
 export default function Cart() {
-  const products = [
-    {
-      id: 1,
-      photo: "/mockup(sofa).png",
-      name: "GLOSTAD กลูสตอด",
-      details: "โซฟา 2 ที่นั่ง , คนีซา เทาเข้ม",
-      price: 2990,
-    },
-    {
-      id: 2,
-      photo: "/mockup(chair).png",
-      name: "ADDE อ็อดเด",
-      details: "เก้าอี้, ขาว",
-      price: 349,
-    },
-  ];
-  const totalprice = products.reduce((acc, product) => acc + product.price, 0);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3005/cart")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Data fetched successfully:", data);
+        setCartItems(data); // Update state with fetched data
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }, []);
+
+  const calculateTotalPrice = (cartItems) => {
+    if (!cartItems || cartItems.length === 0) {
+      return 0; // Return 0 if cartItems is undefined or empty
+    }
+
+    let totalPrice = 0;
+    cartItems.forEach((item) => {
+      totalPrice += item.product.price;
+    });
+    return totalPrice;
+  };
 
   const handleConfirm = () => {
     console.log("Confirm");
@@ -35,27 +49,31 @@ export default function Cart() {
             My Cart
           </h1>
           <div className="font-th-font">
-            {products.map((product) => (
-              <CartCard key={product.id} data={product} />
+            {cartItems.map((item) => (
+              <CartCard key={item.id} item={item} />
             ))}
+            {/* {products.map((product) => (
+              <CartCard key={product.id} data={product} />
+            ))} */}
           </div>
 
           <div className="flex justify-between mb-32">
             <div className="flex items-center">
               <div className="text-black text-5xl font-medium font-en-font">
-                Total {totalprice} บาท
+                Total {calculateTotalPrice(cartItems)} บาท
               </div>
             </div>
-
             <div style={{ marginRight: "133px" }}>
-              <button onClick={handleConfirm} className="focus:outline-none">
-                <Image
-                  src="/buttonConfirm.png"
-                  alt="Add to Cart"
-                  width={289}
-                  height={101}
-                />
-              </button>
+              <a href="/payment">
+                <button onClick={handleConfirm} className="focus:outline-none">
+                  <Image
+                    src="/buttonConfirm.png"
+                    alt="Add to Cart"
+                    width={289}
+                    height={101}
+                  />
+                </button>
+              </a>
             </div>
           </div>
         </div>
