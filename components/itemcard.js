@@ -24,6 +24,20 @@ export default function ItemCard({ item }) {
           </div>
           <p className="font-th-font">{item.shortdescription}</p>
           <p className="font-th-font">{item.price} บาท</p>
+
+//     <div class="flex items-center justify-center max-w-xl max-h-56 p-3">
+//         <div class=" flex flex-col relative h-56 w-48 justify-center">
+//             <img class="relative z-0" src="/Ellipse 7.png" />
+//             <img class="absolute z-10 top-5 left-0" src="/glostad-2-seat-sofa-knisa-dark-grey__0950864_pe800736_s5 2.png" />
+//         </div>
+//         <div class="flex flex-col mx-5 h-56 w-80 pb-4 justify-center">
+//             <div class="flex flex-wrap">
+//                 <p class="font-en-font text-3xl pr-2 ">PRAKTREIREA</p>
+//                 <p class="font-th-font text-3xl ">กลูสตอด</p>
+//             </div>
+//             <p className="font-th-font">โซฟา 2 ที่นั่ง, คนีซา เทาเข้ม</p>
+//             <p className="font-th-font">2,990 บาท</p>
+
         </div>
         <div>
           <button className="hover:animate-sideways">
