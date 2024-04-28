@@ -40,8 +40,8 @@ export default function Payment() {
         "http://localhost:3005/payments",
         formDataWithCartID
       );
-      localStorage.clear()
-      router.push("/home")
+      localStorage.clear();
+      router.push("/home");
       console.log("Payment created:", response.data);
     } catch (error) {
       console.error("Error creating payment:", error);
@@ -305,17 +305,21 @@ export default function Payment() {
             </label>
           </div>
 
-          <div style={{ marginLeft: "970px", marginTop: "80px" }}>
-            <Link href=" ">
-              <button onClick={handleSubmit} className="focus:outline-none">
-                <Image
-                  src="/buttonPayment.png"
-                  alt="Shop Now"
-                  width={239}
-                  height={101}
-                />
-              </button>
-            </Link>
+          <div
+            style={{
+              marginLeft: "850px",
+              marginTop: "80px",
+              
+            }}
+          >
+            <button onClick={handleSubmit} className="focus:outline-none w-64 ">
+              <Image
+                src="/buttonPayment.png"
+                alt="Shop Now"
+                width={289}
+                height={101}
+              />
+            </button>
           </div>
         </div>
       </div>

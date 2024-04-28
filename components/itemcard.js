@@ -20,7 +20,6 @@ export default function ItemCard({ item }) {
         <div class="mx-5">
           <div class="flex flex-wrap">
             <p class="font-en-font text-3xl pr-2 ">{item.name}</p>
-            {/* <p class="font-th-font text-3xl ">กลูสตอด</p> */}
           </div>
           <p className="font-th-font">{item.shortdescription}</p>
           <p className="font-th-font">{item.price} บาท</p>
