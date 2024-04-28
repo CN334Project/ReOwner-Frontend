@@ -2,12 +2,17 @@ import Image from "next/image";
 import Navbar from "../../components/navbar";
 import CartCard from "@/components/cartcard";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
+  const router = useRouter();
+  const cartID =
+    typeof window !== "undefined" ? localStorage.getItem("cartID") : "";
+  
 
   useEffect(() => {
-    fetch("http://localhost:3005/cart")
+    fetch(`http://localhost:3005/cart/${cartID}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -15,8 +20,8 @@ export default function Cart() {
         return response.json();
       })
       .then((data) => {
-        console.log("Data fetched successfully:", data);
-        setCartItems(data); // Update state with fetched data
+        console.log("Data fetched successfully:", data.product);
+        setCartItems(data.product); // Update state with fetched data
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -30,13 +35,15 @@ export default function Cart() {
 
     let totalPrice = 0;
     cartItems.forEach((item) => {
-      totalPrice += item.product.price;
+      totalPrice += item.price;
     });
     return totalPrice;
   };
 
   const handleConfirm = () => {
-    console.log("Confirm");
+    if (!cartItems || cartItems.length === 0) {
+      return true;
+    }
   };
 
   return (
@@ -64,16 +71,18 @@ export default function Cart() {
               </div>
             </div>
             <div style={{ marginRight: "133px" }}>
-              <a href="/payment">
-                <button onClick={handleConfirm} className="focus:outline-none">
-                  <Image
-                    src="/buttonConfirm.png"
-                    alt="Add to Cart"
-                    width={289}
-                    height={101}
-                  />
-                </button>
-              </a>
+              <button
+                onClick={() => router.push("/payment")}
+                disabled={handleConfirm()}
+                className="focus:outline-none"
+              >
+                <Image
+                  src="/buttonConfirm.png"
+                  alt="Add to Cart"
+                  width={289}
+                  height={101}
+                />
+              </button>
             </div>
           </div>
         </div>

@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 
 export default function Category() {
   const [items, setItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const router = useRouter();
 
   const category = router.query.category;
@@ -32,22 +34,26 @@ export default function Category() {
 
   useEffect(() => {
     const fetchProductList = async () => {
-        try {
-          const result = await handleProductList();
-          setItems(JSON.parse(result));
-        } catch (err) {
-          console.error(err);
-        }
-      };
-      fetchProductList();
+      try {
+        const result = await handleProductList();
+        setItems(JSON.parse(result));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProductList();
   }, []);
+
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
       <div>
         <Navbar />
       </div>
-      <Searchbar />
+      <Searchbar setSearchQuery={setSearchQuery} />
       <div className="flex justify-center items-center w-screen h-40">
         <h1 className="font-en-font font-bold text-7xl">{category}</h1>
       </div>
@@ -70,9 +76,13 @@ export default function Category() {
           Most viewed
         </h1>
         <div class="grid grid-flow-row-dense grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 h-screen w-full mx-3 content-start justify-items-center">
-          {items.map((item) => (
-            <ItemCard key={item.id} item={item} />
-          ))}
+        {searchQuery
+            ? filteredItems.map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))
+            : items.map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))}
         </div>
       </div>
     </>

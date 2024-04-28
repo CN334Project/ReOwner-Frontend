@@ -17,14 +17,14 @@ export default function ItemCard({ item }) {
           <img class="relative z-0" src="/Ellipse 7.png" />
           <img class="absolute z-10 top-0 left-0" src={item.image} />
         </div>
-        <div class="flex flex-col mx-5 h-56 w-80 pb-4 justify-center">
+        <div class="flex flex-col mx-5 h-56 w-80 pb-4 justify-center text-left">
           <div class="flex flex-wrap">
-            <p class="font-en-font text-3xl pr-2 ">{item.name}</p>
-            {/* <p class="font-th-font text-3xl ">กลูสตอด</p> */}
+            <p class="font-en-font text-3xl pr-2">{item.name}</p>
           </div>
-          <p className="font-th-font">{item.shortdescription}</p>
-          <p className="font-th-font">{item.price} บาท</p>
+          <p class="font-th-font">{item.shortdescription}</p>
+          <p class="font-th-font">{item.price} บาท</p>
         </div>
+
         <div>
           <button className="hover:animate-sideways">
             <svg

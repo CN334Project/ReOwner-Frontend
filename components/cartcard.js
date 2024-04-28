@@ -6,7 +6,8 @@ export default function CartCard({ item }) {
   const handleRemoveFromCart = async (productId) => {
     try {
       const response = await axios.patch("http://localhost:3005/cart/remove", {
-        productId: productId,
+        productIdToRemove: productId,
+        cartID: localStorage.getItem("cartID")
       });
       window.location.reload();
       console.log("Product removed from cart:", response.data.message);
@@ -30,7 +31,7 @@ export default function CartCard({ item }) {
           <div className="flex items-center">
             <div className="ml-9">
               <img
-                src={item.product.image}
+                src={item.image}
                 alt="ProductPhoto"
                 width={250}
                 height={250}
@@ -38,20 +39,20 @@ export default function CartCard({ item }) {
             </div>
             <div className="ml-5">
               <div className="text-4xl font-bold mb-2 fraunces-font">
-                {item.product.name}
+                {item.name}
               </div>
-              <div>{item.product.shortdescription}</div>
+              <div>{item.shortdescription}</div>
             </div>
             <div className="absolute top-4 right-4 mt-16 mr-14 flex flex-col items-end">
               <div className="text-3xl font-medium fraunces-font">
-                {item.product.price} บาท
+                {item.price} บาท
               </div>
 
               <div style={{ marginTop: "80px" }}>
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    handleRemoveFromCart(item.product._id);
+                    handleRemoveFromCart(item._id);
                   }}
                 >
                   <Image
