@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 
 export default function Shop() {
   const [items, setItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const categorys = [
     {
@@ -39,19 +40,23 @@ export default function Shop() {
       })
       .then((data) => {
         console.log("Data fetched successfully:", data);
-        setItems(data); // Update state with fetched data
+        setItems(data); 
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
       });
   }, []);
+
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   
   return (
     <>
       <div>
         <Navbar />
       </div>
-      <Searchbar />
+      <Searchbar setSearchQuery={setSearchQuery} />
       <div class="flex m-[50px] mt-24 pt-10 sm:justify-center">
         {categorys.map((category, image) => (
           <CategoryCard key={category} category={category.category} image={category.photo} />
@@ -71,14 +76,18 @@ export default function Shop() {
           />
         </svg>
       </div>
-      <div class="h-screen w-full bg-white">
+      <div class="w-full bg-white">
         <h1 class="font-en-font font-semibold text-4xl mb-12 pl-20">
           Most viewed
         </h1>
         <div class="grid grid-flow-row-dense grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 h-screen w-full mx-3 content-start justify-items-center">
-          {items.map((item) => (
-            <ItemCard key={item.id} item={item} />
-          ))}
+        {searchQuery
+            ? filteredItems.map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))
+            : items.map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))}
         </div>
       </div>
     </>
