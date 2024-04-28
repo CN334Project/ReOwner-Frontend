@@ -59,6 +59,7 @@ export default function DashBoard() {
           });
         });
         setTotalPrice(totalPrice)
+        
         console.log(totalPrice);
       })
       .catch((error) => {
